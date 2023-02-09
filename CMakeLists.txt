@@ -5,8 +5,15 @@ set(CMAKE_CXX_STANDARD 17)
 ##########################################################
 # Global project setup
 ##########################################################
+message("Setting up project...")
 project(elements)
 include_directories(include)
+
+file(GLOB_RECURSE imguiSources src/imgui/**)
+message("Included source files: ${imguiSources}")
+
+file(GLOB_RECURSE headers include/**)
+message("Included headers: ${headers}")
 
 ##########################################################
 # ImGui version
@@ -39,7 +46,7 @@ include(imgui_bundle_add_app)
 #target_link_libraries(elements_imgui_lib imgui)
 
 # Demo application
-imgui_bundle_add_app(elements_imgui_demo main.cpp include/elements/element.h src/imgui/imgui_number.cpp include/elements/number.h include/elements/package.h src/imgui/imgui_package.cpp include/elements/app.h src/imgui/imgui_app.cpp)
+imgui_bundle_add_app(elements_imgui_demo main.cpp ${imguiSources} ${headers})
 
 ##########################################################
 # Text-only version

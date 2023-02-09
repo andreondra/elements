@@ -4,6 +4,7 @@
 
 #include "elements/element.h"
 #include "elements/number.h"
+#include "elements/separator.h"
 #include "elements/package.h"
 #include "elements/app.h"
 
@@ -21,8 +22,10 @@ int main() {
         new Elements::Number(&number8, "Number 8"),
         new Elements::Number(&number16, "Number 16"),
         new Elements::Number(&number32, "Number 32"),
+        new Elements::Separator(),
         new Elements::Number(&numberInt, "Number Int"),
         new Elements::Number(&number64, "Number 64"),
+        new Elements::Separator(),
         new Elements::Number(&numberDbl, "Number dbl")
     });
 
