@@ -9,7 +9,7 @@ message("Setting up project...")
 project(elements)
 include_directories(include)
 
-file(GLOB_RECURSE imguiSources src/imgui/**)
+file(GLOB_RECURSE imguiSources src/imgui/** src/*)
 message("Included source files: ${imguiSources}")
 
 file(GLOB_RECURSE headers include/**)

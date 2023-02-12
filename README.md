@@ -1,5 +1,5 @@
 # ![elements logo](assets/logo.svg)
-GUI abstraction library for system  emulators.
+C++17 GUI abstraction library for system  emulators.
 
 ## License
 Copyright (C) 2023 Ondrej Golasowski

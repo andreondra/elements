@@ -5,7 +5,6 @@
 #ifndef ELEMENTS_SEPARATOR_H
 #define ELEMENTS_SEPARATOR_H
 
-#include <string>
 #include <memory>
 #include "element.h"
 

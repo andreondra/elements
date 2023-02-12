@@ -8,7 +8,7 @@
 #include "elements/package.h"
 #include "elements/app.h"
 
-int main() {
+int main(int argc, char** argv) {
 
     uint8_t number8 = INT8_MAX;
     uint16_t number16 = INT16_MAX;
