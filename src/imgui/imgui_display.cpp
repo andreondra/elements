@@ -24,7 +24,7 @@ public:
 Elements::Display::Impl::Impl(const std::string & name, const Types::PixelData & data, bool scalable)
  : name(name), image(data), scalable(scalable) {
 
-    if(name.size() == 0) throw std::invalid_argument("Name length is zero.");
+    if(name.empty()) throw std::invalid_argument("Name length is zero.");
 }
 
 void Elements::Display::Impl::render() {
