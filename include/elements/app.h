@@ -18,7 +18,7 @@ namespace Elements {
         std::unique_ptr<Impl> pImpl;
 
     public:
-        App(const std::string & name = "Elements Application");
+        App(const std::string & name = "Elements Application", int width = 640, int height = 480);
         ~App() noexcept;
 
         void addPackage(Elements::Package && package);

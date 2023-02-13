@@ -14,12 +14,13 @@ class Elements::App::Impl {
 
 private:
     std::string mName;
+    int width, height;
     std::vector<Elements::Package> mPackages;
 
     void mainLoop();
 
 public:
-    Impl(const std::string & name);
+    Impl(const std::string & name, int width, int height);
     ~Impl() noexcept;
 
     void addPackage(Elements::Package && package);
@@ -28,8 +29,8 @@ public:
     void run();
 };
 
-Elements::App::Impl::Impl(const std::string &name)
- : mName(name) {
+Elements::App::Impl::Impl(const std::string &name, int width, int height)
+ : mName(name), width(width), height(height) {
 
 }
 
@@ -50,7 +51,9 @@ void Elements::App::Impl::run() {
             mainLoop();
         },
         mName,
-        true
+        false,
+        true,
+        {width, height}
     );
 }
 
@@ -61,8 +64,8 @@ void Elements::App::Impl::mainLoop() {
     }
 }
 
-Elements::App::App(const std::string &name)
- : pImpl(std::make_unique<Impl>(name)) { }
+Elements::App::App(const std::string &name, int width, int height)
+ : pImpl(std::make_unique<Impl>(name, width, height)) { }
 
 Elements::App::~App() noexcept { }
 
