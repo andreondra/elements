@@ -9,10 +9,9 @@
 #include <memory>
 #include <functional>
 #include "element.h"
+#include "elements/types.h"
 
 namespace Elements{
-
-
 
     /**
      * An element for rendering raw RGBA pixel data. Usable for textures, small video outputs etc.
@@ -22,12 +21,12 @@ namespace Elements{
     private:
         class Impl;
         // Only for cloning purposes.
-        Display(const Separator & src);
+        Display(const Display & src);
         std::unique_ptr<Impl> mpImpl;
 
     public:
-        Display(const std::string & name, PixelData data);
-        ~Display();
+        Display(const std::string & name, const Types::PixelData & data, bool scalable = false);
+        ~Display() override = default;
 
         void render() override;
         Element *clone() const override;

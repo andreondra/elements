@@ -28,6 +28,14 @@ namespace Elements::Types {
         return adapter(rawData, x, y, width, height);
     }
 
+    size_t PixelData::getWidth() const {
+        return width;
+    }
+
+    size_t PixelData::getHeight() const {
+        return height;
+    }
+
     Pixel PixelData::ByteArrayRGBAToPixel(const void *rawData, size_t x, size_t y, size_t width, size_t height) {
 
         auto *pRawData = static_cast<const unsigned char*>(rawData);

@@ -46,6 +46,8 @@ namespace Elements::Types{
         static Types::Pixel ByteVectorRGBAToPixel(const void *rawData, size_t x, size_t y, size_t width, size_t height);
 
         [[nodiscard]] Pixel getPixel(size_t x, size_t y) const;
+        [[nodiscard]] size_t getWidth() const;
+        [[nodiscard]] size_t getHeight() const;
     };
 }
 
