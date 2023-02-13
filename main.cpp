@@ -9,6 +9,7 @@
 #include "elements/app.h"
 #include "elements/types.h"
 #include "elements/display.h"
+#include "elements/bool.h"
 #include <array>
 #include <cstdlib>
 
@@ -32,6 +33,7 @@ int main(int argc, char** argv) {
         idx = (idx + 1) % 4;
     }
 
+    bool exampleBoolean = false;
     Elements::Types::PixelData pixeldata(200, 200, rawPixels.data(), Elements::Types::PixelData::ByteArrayRGBAToPixel);
 
     Elements::Package pkg("Test package");
@@ -43,6 +45,8 @@ int main(int argc, char** argv) {
         new Elements::Number(&number64, "Number 64"),
         new Elements::Separator(),
         new Elements::Number(&numberDbl, "Number dbl"),
+        new Elements::Separator(),
+        new Elements::Bool("Check me!", &exampleBoolean),
         new Elements::Separator(),
         new Elements::Display("Display Example", pixeldata, true)
     });
