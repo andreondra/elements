@@ -10,6 +10,8 @@
 #include "elements/types.h"
 #include "elements/display.h"
 #include "elements/bool.h"
+#include "elements/memory.h"
+#include "elements/text.h"
 #include <array>
 #include <cstdlib>
 
@@ -33,20 +35,25 @@ int main(int argc, char** argv) {
         idx = (idx + 1) % 4;
     }
 
+    uint8_t memory[] = {0x00, 0x01, 0x10, 0x11, 0xaa, 0xff, 0xba, 0xba};
+
     bool exampleBoolean = false;
     Elements::Types::PixelData pixeldata(200, 200, rawPixels.data(), Elements::Types::PixelData::ByteArrayRGBAToPixel);
 
     Elements::Package pkg("Test package");
     pkg.addElements({
-        new Elements::Number(&number8, "Number 8"),
-        new Elements::Number(&number16, "Number 16"),
-        new Elements::Number(&number32, "Number 32"),
-        new Elements::Number(&numberInt, "Number Int"),
-        new Elements::Number(&number64, "Number 64"),
+        new Elements::Text("Example plain text"),
+        new Elements::Number("Number 8", &number8),
+        new Elements::Number("Number 16", &number16),
+        new Elements::Number("Number 32", &number32),
+        new Elements::Number("Number Int", &numberInt),
+        new Elements::Number("Number 64", &number64),
         new Elements::Separator(),
-        new Elements::Number(&numberDbl, "Number dbl"),
+        new Elements::Number("Number dbl", &numberDbl),
         new Elements::Separator(),
         new Elements::Bool("Check me!", &exampleBoolean),
+        new Elements::Separator(),
+        new Elements::Memory("Example memory view", memory, sizeof(memory), 0, false),
         new Elements::Separator(),
         new Elements::Display("Display Example", pixeldata, true)
     });

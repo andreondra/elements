@@ -9,17 +9,10 @@ message("Setting up project...")
 project(elements)
 include_directories(include)
 
-file(GLOB_RECURSE imguiSources src/imgui/** src/*)
-message("Included source files: ${imguiSources}")
-
-file(GLOB_RECURSE headers include/**)
-message("Included headers: ${headers}")
-
 ##########################################################
 # ImGui version
 ##########################################################
 # Download imgui_bundle
-include(FetchContent)
 Set(FETCHCONTENT_QUIET FALSE)
 FetchContent_Declare(
         imgui_bundle
@@ -33,8 +26,19 @@ FetchContent_MakeAvailable(imgui_bundle)
 list(APPEND CMAKE_MODULE_PATH ${IMGUIBUNDLE_CMAKE_PATH})
 include(imgui_bundle_add_app)
 
-#add_library(imgui INTERFACE)
-#target_include_directories(imgui INTERFACE ${imgui_SOURCE_DIR}/)
+# Download imgui memory editor.
+FetchContent_Declare(
+        imgui_memedit
+        GIT_REPOSITORY https://github.com/ocornut/imgui_club.git
+        GIT_PROGRESS TRUE
+        GIT_TAG main
+)
+FetchContent_MakeAvailable(imgui_memedit)
+include_directories(${imgui_memedit_SOURCE_DIR}/imgui_memory_editor)
+
+# Including sources.
+file(GLOB_RECURSE imguiSources src/imgui/** src/*)
+message("Included source files: ${imguiSources}")
 
 # Add ImGui version targets
 # Library
@@ -46,7 +50,7 @@ include(imgui_bundle_add_app)
 #target_link_libraries(elements_imgui_lib imgui)
 
 # Demo application
-imgui_bundle_add_app(elements_imgui_demo main.cpp ${imguiSources} ${headers})
+imgui_bundle_add_app(elements_imgui_demo main.cpp ${imguiSources})
 
 ##########################################################
 # Text-only version

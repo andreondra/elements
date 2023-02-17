@@ -26,74 +26,74 @@ template<typename T>
 class Elements::Number<T>::Impl{
 
 private:
-    T *mpTarget;
-    std::string mName;
+    std::string name;
+    T *target;
 
 public:
-    Impl(T *pTarget, const std::string &name);
+    Impl(const std::string &name, T *target);
     ~Impl();
     void render();
 };
 
 template<typename T>
-Elements::Number<T>::Impl::Impl(T *pTarget, const std::string &name)
-        : mpTarget(pTarget), mName(name) { }
+Elements::Number<T>::Impl::Impl(const std::string &name, T *target)
+        : name(name), target(target) { }
 
 template<typename T>
 Elements::Number<T>::Impl::~Impl() = default;
 
 template<>
 void Elements::Number<unsigned char>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_U8, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_U8, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<signed char>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_S8, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_S8, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<short int>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_S16, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_S16, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<unsigned short int>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_U16, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_U16, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<int>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_S32, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_S32, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<unsigned int>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_U32, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_U32, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<long int>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_S32, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_S32, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<unsigned long int>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_U32, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_U32, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<long long int>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_S64, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_S64, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<unsigned long long int>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_U64, mpTarget, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_U64, target, NULL, NULL, "%x", ImGuiInputTextFlags_CharsHexadecimal);
 }
 template<>
 void Elements::Number<float>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_Float, mpTarget, NULL, NULL);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_Float, target, NULL, NULL);
 }
 template<>
 void Elements::Number<double>::Impl::render() {
-    ImGui::InputScalar(mName.c_str(), ImGuiDataType_Double, mpTarget, NULL, NULL);
+    ImGui::InputScalar(name.c_str(), ImGuiDataType_Double, target, NULL, NULL);
 }
 
 template<typename T>
-Elements::Number<T>::Number(T *pTarget, const std::string &name)
-        : mpImpl(std::make_unique<Impl>(pTarget, name)) { }
+Elements::Number<T>::Number(const std::string &name, T *target)
+        : mpImpl(std::make_unique<Impl>(name, target)) { }
 
 template<typename T>
 Elements::Number<T>::Number(const Number &src)
@@ -102,8 +102,7 @@ Elements::Number<T>::Number(const Number &src)
 }
 
 template<typename T>
-Elements::Number<T>::~Number() {
-};
+Elements::Number<T>::~Number() = default;
 
 template<typename T>
 void Elements::Number<T>::render() {
@@ -114,4 +113,3 @@ template<typename T>
 Elements::Element * Elements::Number<T>::clone() const {
     return new Elements::Number(*this);
 }
-

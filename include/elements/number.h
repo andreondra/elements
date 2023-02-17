@@ -22,8 +22,8 @@ namespace Elements{
         std::unique_ptr<Impl> mpImpl;
 
     public:
-        Number(T *pTarget, std::string const& name = "");
-        ~Number();
+        Number(std::string const& name, T *target);
+        ~Number() override;
 
         void render() override;
         Element *clone() const override;
