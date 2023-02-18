@@ -9,6 +9,7 @@
 #include <memory>
 #include <initializer_list>
 #include "element.h"
+#include "types.h"
 
 namespace Elements{
 
@@ -18,13 +19,16 @@ namespace Elements{
         std::unique_ptr<Impl> pImpl;
 
     public:
-        Package(const std::string & name = "Default package");
+        Package(const std::string & name = "Default package", Types::Dock defaultDock = Types::Dock::DEFAULT);
         Package(const Package & src);
         Package(Package && src) noexcept;
         Package & operator=(Package src) noexcept;
         ~Package() noexcept;
 
         void addElements(std::initializer_list<Elements::Element*> elementList);
+        [[nodiscard]] std::string getName() const;
+        [[nodiscard]] Types::Dock getDefaultDock() const;
+
         void render();
     };
 }

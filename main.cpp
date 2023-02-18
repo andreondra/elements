@@ -14,6 +14,11 @@
 #include "elements/text.h"
 #include <array>
 #include <cstdlib>
+#include <string>
+
+std::string getCurrentInstruction() {
+    return "0x52: IMM";
+}
 
 int main(int argc, char** argv) {
 
@@ -40,9 +45,10 @@ int main(int argc, char** argv) {
     bool exampleBoolean = false;
     Elements::Types::PixelData pixeldata(200, 200, rawPixels.data(), Elements::Types::PixelData::ByteArrayRGBAToPixel);
 
-    Elements::Package pkg("Test package");
+    Elements::Package pkg("Test package", Elements::Types::Dock::LEFT);
     pkg.addElements({
-        new Elements::Text("Example plain text"),
+        new Elements::Text("Example text received via getter:"),
+        new Elements::Text(getCurrentInstruction()),
         new Elements::Number("Number 8", &number8),
         new Elements::Number("Number 16", &number16),
         new Elements::Number("Number 32", &number32),
@@ -55,12 +61,17 @@ int main(int argc, char** argv) {
         new Elements::Separator(),
         new Elements::Memory("Example memory view", memory, sizeof(memory), 0, false),
         new Elements::Separator(),
-        new Elements::Display("Display Example", pixeldata, true)
+        new Elements::Text("This is a beginning of custom rendering!"),
+        new Elements::Display("Display Example", pixeldata, true),
+        new Elements::Text("This is the end of custom rendering!")
     });
 
     Elements::App app;
-    app.addPackage(pkg);
-    app.run();
+    app.setName("My App")
+        .setDocking(true)
+        .setLeftDock(true)
+        .addPackage(pkg)
+        .run();
 
     return 0;
 }

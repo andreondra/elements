@@ -9,6 +9,7 @@
 #include <memory>
 #include <string>
 #include "package.h"
+#include "types.h"
 
 namespace Elements {
 
@@ -18,11 +19,18 @@ namespace Elements {
         std::unique_ptr<Impl> pImpl;
 
     public:
-        App(const std::string & name = "Elements Application", int width = 640, int height = 480);
+        explicit App();
         ~App() noexcept;
 
-        void addPackage(Elements::Package && package);
-        void addPackage(const Elements::Package & package);
+        App & setName(const std::string & name);
+        App & setWindowSize(Types::Size size);
+        App & setDocking(bool enabled);
+        App & setLeftDock(bool enabled);
+        App & setBottomDock(bool enabled);
+        App & setRightDock(bool enabled);
+
+        App & addPackage(Elements::Package && package);
+        App & addPackage(const Elements::Package & package);
 
         void run();
     };

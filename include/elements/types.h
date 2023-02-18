@@ -10,6 +10,18 @@
 
 namespace Elements::Types{
 
+    enum class Dock : int {
+        DEFAULT = 0,
+        LEFT    = 1,
+        BOTTOM  = 2,
+        RIGHT   = 3,
+    };
+
+    struct Size{
+        int width;
+        int height;
+    };
+
     struct Pixel{
 
         Pixel() = default;
