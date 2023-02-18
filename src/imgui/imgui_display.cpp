@@ -53,6 +53,11 @@ void Elements::Display::Impl::render() {
             dl->AddRectFilled({screenX, screenY}, {screenX + scale, screenY + scale}, color);
         }
     }
+
+    float dummyWidth = scale * static_cast<float>(image.getWidth());
+    float dummyHeight = scale * static_cast<float>(image.getHeight());
+    // Dummy widget is needed for scrollbars to work and to allow to place more elements below correctly.
+    ImGui::Dummy({dummyWidth, dummyHeight});
 }
 
 Elements::Display::Display(const std::string & name, const Types::PixelData & data, bool scalable)
