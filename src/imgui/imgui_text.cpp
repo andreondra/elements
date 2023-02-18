@@ -3,32 +3,43 @@
 //
 
 #include <string>
+#include <utility>
 #include "imgui.h"
 #include "elements/text.h"
+#include <iostream>
 
 class Elements::Text::Impl{
 
 private:
-    std::string text;
+    std::function<std::string (void)> getter;
 
 public:
-    Impl(const std::string & text);
+    explicit Impl(const std::string & text);
+    explicit Impl(std::function<std::string (void)> getter);
     ~Impl() = default;
     void render();
 };
 
 Elements::Text::Impl::Impl(const std::string & text)
-        : text(text) {
+        : getter([text](){
+            return text;
+        }) {
 
     if(text.empty()) throw std::invalid_argument("Text is empty.");
 }
 
+Elements::Text::Impl::Impl(std::function<std::string (void)> getter)
+    : getter(std::move(getter)) { }
+
 void Elements::Text::Impl::render() {
-    ImGui::Text(text.c_str());
+    ImGui::Text("%s", getter().c_str());
 }
 
 Elements::Text::Text(const std::string & text)
         : mpImpl(std::make_unique<Impl>(text)) { }
+
+Elements::Text::Text(const std::function<std::string (void)> & getter)
+        : mpImpl(std::make_unique<Impl>(getter)) { }
 
 Elements::Text::Text(const Text &src)
         : mpImpl(std::make_unique<Impl>(*src.mpImpl)) { }

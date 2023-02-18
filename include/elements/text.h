@@ -6,6 +6,7 @@
 #define ELEMENTS_TEXT_H
 
 #include <memory>
+#include <functional>
 #include "element.h"
 
 namespace Elements{
@@ -21,7 +22,8 @@ namespace Elements{
         std::unique_ptr<Impl> mpImpl;
 
     public:
-        Text(const std::string & text);
+        explicit Text(const std::string & text);
+        explicit Text(const std::function<std::string (void)> & getter);
         ~Text() override = default;
 
         void render() override;
